@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>채식요리추천 - 내 손안의 제철 채식 레시피</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="mobile-app">
+
+  <!-- ========================================================
+       SCREEN 1: WELCOME & SERVICE INTRODUCTION
+       ======================================================== -->
+  <section id="screen-intro" class="screen active">
+    <div class="intro-hero">
+      <div class="intro-badge">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <span>자연이 선물한 제철 식탁</span>
+      </div>
+
+      <div class="intro-logo-wrap">
+        <svg class="icon" viewBox="0 0 24 24">
+          <!-- Leaf / Plant in Bowl Icon -->
+          <path d="M12 22C6.5 22 2 17.5 2 12c0-.5.4-1 1-1h18c.6 0 1 .5 1 1 0 5.5-4.5 10-10 10z"/>
+          <path d="M12 11c0-4.5 3.5-8 8-8-1 4.5-4.5 8-8 8z"/>
+          <path d="M12 11c0-3.5-2.5-6-6-6 .5 3.5 3 6 6 6z"/>
+        </svg>
+      </div>
+
+      <h1 class="intro-title">채식요리추천</h1>
+      <p class="intro-subtitle">
+        냉장고 속 간단한 재료를 입력하면,<br>
+        가장 맛있고 건강한 제철 채식 요리를 똑똑하게 찾아드려요.
+      </p>
+
+      <div class="intro-features">
+        <div class="feature-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
+          <h4>맞춤형 제철 추천</h4>
+          <p>사계절 영양을 듬뿍 담은 레시피</p>
+        </div>
+        <div class="feature-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h4>영양가 & 효능 분석</h4>
+          <p>칼로리와 비타민, 항산화 분석</p>
+        </div>
+        <div class="feature-item">
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <h4>간편한 시간 조절</h4>
+          <p>15분 초간단부터 정성 가득 요리</p>
+        </div>
+        <div class="feature-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <h4>직관적인 카드 UI</h4>
+          <p>누구나 3초 만에 쓰는 친절한 가이드</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro-actions">
+      <button id="btn-start" class="btn btn-primary" type="button">
+        <span>채식 요리 추천 시작하기</span>
+        <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SCREEN 2: INGREDIENT INPUT & PREFERENCES
+       ======================================================== -->
+  <section id="screen-input" class="screen">
+    <!-- Header -->
+    <header class="app-header">
+      <button id="btn-back-to-intro" class="header-btn" title="첫 화면으로">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <span class="header-title">재료 및 조건 입력</span>
+      <button id="btn-reset-input" class="header-btn" title="초기화">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      </button>
+    </header>
+
+    <!-- Season Filter -->
+    <div class="card" style="padding: 16px;">
+      <div class="quick-title" style="margin-bottom: 10px;">
+        <span>🌱 지금 찾고 싶은 계절</span>
+        <span id="current-season-badge" style="font-weight: normal; color: var(--primary);">현재: 늦가을/겨울 제철</span>
+      </div>
+      <div class="season-selector">
+        <button class="season-tab active" data-season="all">전체 🌿</button>
+        <button class="season-tab" data-season="봄">봄 🌸</button>
+        <button class="season-tab" data-season="여름">여름 ☀️</button>
+        <button class="season-tab" data-season="가을">가을 🍂</button>
+        <button class="season-tab" data-season="겨울">겨울 ❄️</button>
+      </div>
+    </div>
+
+    <!-- Ingredient Input Card -->
+    <div class="card">
+      <div class="quick-title">
+        <span>🥕 가지고 있는 재료 입력</span>
+        <span id="tag-count-label" style="font-size: 0.8rem; color: var(--primary); font-weight: 700;">0개 선택됨</span>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="custom-ingredient-input" class="input-field" placeholder="예: 두부, 버섯, 배추, 양파..." autocomplete="off">
+        <button id="btn-add-ingredient" class="btn-add" type="button">
+          <svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span>추가</span>
+        </button>
+      </div>
+
+      <!-- Selected Ingredient Tags Box -->
+      <div id="selected-tags-container" class="selected-tags-box">
+        <span class="empty-tags-hint">냉장고 속 재료를 입력하거나 아래 추천 재료를 터치하세요.</span>
+      </div>
+
+      <!-- Quick Ingredient Chips -->
+      <div class="quick-title" style="margin-top: 14px;">
+        <span>💡 자주 쓰는 제철 재료 빠른 선택</span>
+      </div>
+      <div class="quick-pills" id="quick-pills-list">
+        <button class="pill-btn" data-ingredient="두부">두부</button>
+        <button class="pill-btn" data-ingredient="버섯">버섯</button>
+        <button class="pill-btn" data-ingredient="배추">배추</button>
+        <button class="pill-btn" data-ingredient="단호박">단호박</button>
+        <button class="pill-btn" data-ingredient="양파">양파</button>
+        <button class="pill-btn" data-ingredient="감자">감자</button>
+        <button class="pill-btn" data-ingredient="가지">가지</button>
+        <button class="pill-btn" data-ingredient="시금치">시금치</button>
+        <button class="pill-btn" data-ingredient="연근">연근</button>
+        <button class="pill-btn" data-ingredient="무">무</button>
+        <button class="pill-btn" data-ingredient="토마토">토마토</button>
+        <button class="pill-btn" data-ingredient="들깨가루">들깨가루</button>
+        <button class="pill-btn" data-ingredient="된장">된장</button>
+        <button class="pill-btn" data-ingredient="마늘">마늘</button>
+      </div>
+    </div>
+
+    <!-- Interactive Slider: Cooking Time -->
+    <div class="slider-card">
+      <div class="slider-header">
+        <span class="slider-title">
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>희망 최대 조리 시간</span>
+        </span>
+        <span id="slider-time-display" class="slider-value-badge">최대 25분 이내</span>
+      </div>
+
+      <input type="range" id="cooking-time-slider" class="custom-range" min="10" max="45" step="5" value="25">
+
+      <div class="slider-labels">
+        <span>10분 (초간단)</span>
+        <span>25분 (표준)</span>
+        <span>45분 (여유롭게)</span>
+      </div>
+
+      <div class="slider-presets">
+        <button class="preset-btn" data-time="15">⚡ 15분 컷</button>
+        <button class="preset-btn active" data-time="25">🍲 25분 표준</button>
+        <button class="preset-btn" data-time="45">✨ 45분 풀코스</button>
+      </div>
+    </div>
+
+    <!-- Output Button -->
+    <div class="submit-wrap">
+      <button id="btn-submit-recommend" class="btn btn-primary" type="button">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span>결과 출력 (맞춤 레시피 추천받기)</span>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SCREEN 3: RECIPE RECOMMENDATION RESULT
+       ======================================================== -->
+  <section id="screen-result" class="screen">
+    <!-- Header -->
+    <header class="app-header">
+      <button id="btn-back-to-input" class="header-btn" title="재료 다시 입력">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <span class="header-title">추천 채식 요리</span>
+      <button id="btn-share-recipe" class="header-btn" title="레시피 복사">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      </button>
+    </header>
+
+    <!-- Candidate Navigation / Count Header -->
+    <div class="result-candidate-info">
+      <span id="candidate-count-text">발견된 추천 메뉴 1 / 4</span>
+    </div>
+
+    <!-- Main Result Card (Hero) -->
+    <div class="result-status-card">
+      <div class="result-top-badges">
+        <span class="season-badge" id="res-season-badge">
+          <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/></svg>
+          <span id="res-season-text">가을·겨울 제철 요리</span>
+        </span>
+        <span class="match-rate-pill" id="res-match-rate">재료 100% 매칭!</span>
+      </div>
+
+      <h2 class="result-dish-title" id="res-dish-name">들깨 버섯 순두부탕</h2>
+
+      <div class="dish-meta-info">
+        <span class="meta-chip">
+          <svg class="icon" style="width:15px;height:15px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="res-cook-time">조리 15분</span>
+        </span>
+        <span class="meta-chip">
+          <svg class="icon" style="width:15px;height:15px;" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span id="res-calories">약 240 kcal</span>
+        </span>
+        <span class="meta-chip">
+          <svg class="icon" style="width:15px;height:15px;" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span id="res-difficulty">난이도 쉬움</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- 1. 추천하는 이유 -->
+    <div class="section-card">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>추천하는 이유</span>
+      </div>
+      <div class="reason-box" id="res-reason-text">
+        쌀쌀해진 날씨에 제철을 맞은 버섯의 진한 감칠맛과 고소한 들깨가루가 어우러져 속을 따뜻하게 보호해줍니다.
+      </div>
+    </div>
+
+    <!-- 2. 영양가 및 건강 효능 -->
+    <div class="section-card">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>영양가 & 건강 효능</span>
+      </div>
+
+      <div class="nutrition-grid" id="res-nutrition-grid">
+        <div class="nutri-item">
+          <div class="nutri-name">열량</div>
+          <div class="nutri-value" id="res-nutri-cal">240kcal</div>
+        </div>
+        <div class="nutri-item">
+          <div class="nutri-name">단백질</div>
+          <div class="nutri-value" id="res-nutri-protein">14g</div>
+        </div>
+        <div class="nutri-item">
+          <div class="nutri-name">식이섬유</div>
+          <div class="nutri-value" id="res-nutri-fiber">6.2g</div>
+        </div>
+        <div class="nutri-item">
+          <div class="nutri-name">핵심영양</div>
+          <div class="nutri-value" id="res-nutri-key">오메가3</div>
+        </div>
+      </div>
+
+      <div class="nutri-desc-list" id="res-nutrition-desc">
+        • 순두부의 식물성 단백질이 풍부하여 위에 부담 없는 단백질 보충이 가능합니다.<br>
+        • 들깨의 리놀렌산(오메가3)이 혈관 탄력을 돕고 뇌 피로를 개선합니다.<br>
+        • 버섯의 베타글루칸 성분이 환절기 면역력을 탄탄하게 강화해줍니다.
+      </div>
+    </div>
+
+    <!-- 3. 사용 재료 비교 (보유 재료 vs 추가 재료) -->
+    <div class="section-card">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span>재료 구성</span>
+      </div>
+
+      <div class="matched-ingr-section">
+        <div class="ingr-group">
+          <span class="ingr-group-title">✅ 일치하는 내 보유 재료</span>
+          <div class="ingr-tag-list" id="res-matched-ingredients">
+            <span class="ingr-item-chip matched">두부</span>
+            <span class="ingr-item-chip matched">버섯</span>
+          </div>
+        </div>
+        <div class="ingr-group" style="margin-top: 6px;">
+          <span class="ingr-group-title">🧂 기본 양념 및 추가 재료</span>
+          <div class="ingr-tag-list" id="res-extra-ingredients">
+            <span class="ingr-item-chip extra">들깨가루 2큰술</span>
+            <span class="ingr-item-chip extra">대파 약간</span>
+            <span class="ingr-item-chip extra">국간장 1큰술</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 요리 레시피 (단계별 조리법) -->
+    <div class="section-card">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>단계별 조리 레시피</span>
+      </div>
+
+      <div class="step-list" id="res-recipe-steps">
+        <!-- Steps injected dynamically by app.js -->
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="result-actions">
+      <!-- 다시 고르기 버튼 (다른 메뉴 추천) -->
+      <button id="btn-retry-different" class="btn btn-primary" type="button">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+        <span>다시 고르기 (다른 추천 메뉴 보기)</span>
+      </button>
+
+      <button id="btn-re-edit-ingredients" class="btn btn-outline" type="button">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span>재료 및 조건 다시 변경하기</span>
+      </button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Copy / Notification Toast -->
+<div id="toast" class="toast">
+  <svg class="icon" style="stroke:#A5D6A7;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toast-message">레시피 정보가 복사되었습니다!</span>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
